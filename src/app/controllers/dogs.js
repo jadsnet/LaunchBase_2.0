@@ -1,6 +1,4 @@
-const fs = require('fs');
-const data = require('../data.json');
-const { age, date, date_nasc, date_v } = require('../utils');
+const { age,  date_nasc, date_v } = require('../utils');
 
 exports.index = function(resquest, response) {
   return response.render('dogs/index', { dogs: data.dogs })
@@ -15,7 +13,6 @@ exports.show = function(request, response) {
   })
 
   if (!foundDog) return response.send("Pet não encontrado");
-
 
   const dog = {
     ...foundDog,

@@ -1,7 +1,7 @@
 const express = require('express');
 const routes = express.Router();
-const dogs = require('./controllers/dogs');
-const vets = require('./controllers/vets');
+const dogs = require('./app/controllers/dogs');
+const vets = require('./app/controllers/vets');
 
 routes.get('/', function(request, response) {
   return response.redirect('/dogs');
