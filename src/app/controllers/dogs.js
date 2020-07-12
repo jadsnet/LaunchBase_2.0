@@ -1,7 +1,64 @@
 const { age,  date_nasc, date_v } = require('../utils');
+const Dog = require('../models/Dog');
+
+module.exports = {
+  index(request, response)  {
+    Dog.all(function(dogs) {
+
+    return response.render('dogs/index', { dogs })
+    })
+  },
+
+  create(request, response) {
+    return
+
+  },
+
+  post(request, response)   {
+    const keys = Object.keys(request.body)
+
+    for(key of keys) {
+      if(request.body[keys] == ""){
+      return response.send("Por favor preencha todos os campos");
+      }
+    }
+    return
+
+  },
+
+  show(request, response)   {
+    return
+
+  },
+
+  edit(request, response)   {
+    return
+
+  },
+
+  put(request, response)    {
+    const keys = Object.keys(request.body)
+
+    for(key of keys) {
+      if(request.body[keys] == ""){
+      return response.send("Por favor preencha todos os campos");
+      }
+    }
+    return
+
+  },
+
+  delete(request, response) {
+    return
+
+  },
+
+}
+  
+
+
 
 exports.index = function(resquest, response) {
-  return response.render('dogs/index', { dogs: data.dogs })
 }
 
 exports.show = function(request, response) {
