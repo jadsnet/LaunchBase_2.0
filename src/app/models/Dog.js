@@ -50,5 +50,43 @@ module.exports = {
         
         callback(results.rows[0]);
     })
+  },
+
+  update(data, callback) {
+    const query = `
+      UPDATE dogs SET
+        name=($1),
+        avatar_url=($2),
+        birth=($3),
+        breed=($4),
+        gender=($5),
+        abiliity=($6),
+        vaccine=($7)
+      WHERE id = $8
+    `
+    const values = [
+      data.name,
+      data.avatar_url,
+      date(data.birth).iso,
+      data.breed,
+      data.gender,
+      data.abiliity,
+      date(data.vaccine).iso,
+      data.id
+    ]
+
+    db.query(query, values, function(err, results) {
+      if(err) throw `Erro no Banco de dados ${err}`
+
+      callback()
+    })
+  },
+
+  delete(id, callback) {
+    db.query(`DELETE FROM dogs  WHERE id = $1`, [id], function(err, results) {
+      if(err) throw `Erro no Banco de dados! ${err}`
+
+      callback()
+    })
   }
 }

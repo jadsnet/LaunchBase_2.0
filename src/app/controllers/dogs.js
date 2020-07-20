@@ -23,7 +23,7 @@ module.exports = {
       }
     }
 
-    Dog.create(request.body, function(dogs) {
+    Dog.create(request.body, function(dog) {
       return response.redirect(`/dogs/${dog.id}`)
     })
   },
@@ -38,13 +38,18 @@ module.exports = {
 
       return response.render('dogs/show', { dog })
     })
-
-    return
-
   },
 
   edit(request, response)   {
-    return
+    Dog.find(request.params.id, function(dog) {
+      if(!dog) return response.send('Pet não encontrado')
+
+      dog.birth = date(dog.birth).iso
+      dog.vaccine = date(dog.vaccine).iso
+
+
+      return response.render('dogs/edit', { dog })
+    })
 
   },
 
@@ -53,17 +58,19 @@ module.exports = {
 
     for(key of keys) {
       if(request.body[keys] == ""){
-      return response.send("Por favor preencha todos os campos");
+        return response.send("Por favor preencha todos os campos");
       }
     }
-    return
+    Dog.update(request.body, function() {
+      return response.redirect(`/dogs/${request.body.id}`)
+    })
 
   },
 
   delete(request, response) {
-    return
-
-  },
-
+    Dog.delete(request.body.id, function() {
+      return response.redirect(`/dogs`)
+    })
+  }
 }
   

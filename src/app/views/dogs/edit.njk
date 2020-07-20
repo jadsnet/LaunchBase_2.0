@@ -20,16 +20,20 @@
         
       </form>
 
-      <form id="form-delete" action="/dogs?_method=DELETE" method="POST">
-        <input type="hidden" name="id" value="{{ dog.id }}">
+      <form method="POST" id="form-delete" action="/dogs?_method=DELETE">
+        <input type="hidden" name="id" value={{dog.id}}>
         <button type="submit">Deletar</button>
       </form>
 
       <script>
-        const formDelete = document.querySelect('form-delete')
+        const formDelete = document.querySelector('#form-delete')
         formDelete.addEventListener('submit', function(event) {
           const confirmation = confirm('Deseja deletar?')
-          if(!confirmation) event.preventDefault()
+          
+          if(!confirmation) {
+             event.preventDefault()
+          }
+
         })
       </script>
 
